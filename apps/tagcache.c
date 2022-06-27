@@ -2085,7 +2085,13 @@ static int compare(const void *p1, const void *p2)
 
     struct tempbuf_searchidx *e1 = (struct tempbuf_searchidx *)p1;
     struct tempbuf_searchidx *e2 = (struct tempbuf_searchidx *)p2;
-    
+
+    char* name1=e1->str;
+    char* name2=e2->str;
+
+    ignore_the_sort(&name1);
+    ignore_the_sort(&name2);
+
     if (strcmp(e1->str, UNTAGGED) == 0)
     {
         if (strcmp(e2->str, UNTAGGED) == 0)
@@ -2095,7 +2101,7 @@ static int compare(const void *p1, const void *p2)
     else if (strcmp(e2->str, UNTAGGED) == 0)
         return 1;
     
-    return strncasecmp(e1->str, e2->str, TAG_MAXLEN);
+    return strncasecmp(name1, name2, TAG_MAXLEN);
 }
 
 static int tempbuf_sort(int fd)

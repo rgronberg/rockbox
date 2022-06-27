@@ -291,6 +291,7 @@ buildtool() {
     rm -f "$logfile"
 
     echo "ROCKBOXDEV: mkdir build-$toolname"
+    echo "pwd: $(pwd)"
     mkdir "build-$toolname"
 
     echo "ROCKBOXDEV: cd build-$toolname"
@@ -410,6 +411,7 @@ build() {
     fi
 
     echo "ROCKBOXDEV: mkdir build-$toolname"
+    echo "pwd2: $(pwd)"
     mkdir build-$toolname
 
     echo "ROCKBOXDEV: cd build-$toolname"

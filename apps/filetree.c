@@ -192,6 +192,8 @@ static int compare(const void* p1, const void* p2)
 {
     struct entry* e1 = (struct entry*)p1;
     struct entry* e2 = (struct entry*)p2;
+    char *name1 = e1->name;
+    char *name2 = e2->name;
     int criteria;
 
     if (e1->attr & ATTR_DIRECTORY && e2->attr & ATTR_DIRECTORY)
@@ -248,22 +250,24 @@ static int compare(const void* p1, const void* p2)
         case SORT_ALPHA:
         case SORT_ALPHA_REVERSED:
         {
+            ignore_the_sort(&name1);
+            ignore_the_sort(&name2);
             if (global_settings.sort_case)
             {
                 if (global_settings.interpret_numbers == SORT_INTERPRET_AS_NUMBER)
-                    return strnatcmp(e1->name, e2->name)
+                    return strnatcmp(name1, name2)
                            * (criteria == SORT_ALPHA_REVERSED ? -1 : 1);
                 else
-                    return strncmp(e1->name, e2->name, MAX_PATH)
+                    return strncmp(name1, name2, MAX_PATH)
                            * (criteria == SORT_ALPHA_REVERSED ? -1 : 1);
             }
             else
             {
                 if (global_settings.interpret_numbers == SORT_INTERPRET_AS_NUMBER)
-                    return strnatcasecmp(e1->name, e2->name)
+                    return strnatcasecmp(name1, name2)
                            * (criteria == SORT_ALPHA_REVERSED ? -1 : 1);
                 else
-                    return strncasecmp(e1->name, e2->name, MAX_PATH)
+                    return strncasecmp(name1, name2, MAX_PATH)
                            * (criteria == SORT_ALPHA_REVERSED ? -1 : 1);
             }
         }

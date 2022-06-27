@@ -878,6 +878,23 @@ char* strrsplt(char* str, int c)
     return s;
 }
 
+/* If string starts with 'the', advance pointer beyond it; used by compare() */
+void ignore_the_sort(char **name)
+{
+    if (strncasecmp(*name, "the", 3) == 0)
+    {
+        if (islower(*(*name + 3)) == 0)  /* Only ignore if next char isn't a lowercase (eg, "There...") */
+        {
+            if (*(*name + 3) == ' ' || (ispunct(*(*name + 3)) != 0)) /* Kill trailing space or punct */
+               *name = *name + 4;
+            else
+               *name = *name + 3;
+        }
+    }
+
+    return;
+}
+
 /*
  * removes the extension of filename (if it doesn't start with a .)
  * puts the result in buffer

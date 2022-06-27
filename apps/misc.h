@@ -138,6 +138,7 @@ void setvol(void);
 int hex_to_rgb(const char* hex, int* color);
 #endif
 
+void ignore_the_sort(char **name);
 char* strrsplt(char* str, int c);
 char* skip_whitespace(char* const str);
 
